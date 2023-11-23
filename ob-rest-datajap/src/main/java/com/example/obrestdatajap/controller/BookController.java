@@ -2,6 +2,10 @@ package com.example.obrestdatajap.controller;
 
 import com.example.obrestdatajap.entities.Book;
 import com.example.obrestdatajap.repository.BookRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.models.annotations.OpenAPI30;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -48,9 +52,13 @@ public class BookController {
 
     // Buscar un solo libro en la base de datos según su id
     @GetMapping("/api/books/{id}") // {id} es un parametro variable que generara por ejemplo /api/book/2
-    public ResponseEntity<Book> findOneById(@PathVariable Long id) { // @PathVariable vincula id con {id}
+    @Operation(summary = "Busca por id", description = "Busca un libro por clave primaria id Long")
+    public ResponseEntity<Book> findOneById(@Parameter(description = "Clave primaria tipo Long") @PathVariable Long id) {
+        //@PathVariable vincula id con {id}
 
-        Optional<Book> bookOpt = bookRepository.findById(id); // @PathVariable envuelve el id y el null
+        Optional<Book> bookOpt = bookRepository.findById(id); //
+        // @PathVariable
+        // envuelve el id y el null
         // Opción 1
 
         if(bookOpt.isPresent()) {

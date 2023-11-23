@@ -1,20 +1,24 @@
 package com.example.obrestdatajap.entities;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "books") // Para cambiar el monbre en la base de datos
+@Schema(title = "LIBROS", description = "Elementos didácticos compuestos de laminas de papel.")
 public class Book {
 
     // atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Clave ficticia autoincremental")
     private Long id;
     private String title;
     private String author;
     private Integer pages;
+    @Schema(description = "Precio en dolares con decimales.")
     private Double price;
     private LocalDate releaseDate;
     private Boolean online;
